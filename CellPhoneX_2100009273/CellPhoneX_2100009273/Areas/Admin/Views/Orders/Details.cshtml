@@ -1,0 +1,25 @@
+﻿@model CellPhoneX_2100009273.Models.Order
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml"; }
+
+<h3>Order Details:</h3>
+
+<div class="container-fluid">
+
+    <table class="table table-striped">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        @foreach (var detail in ViewBag.OrderDetails)
+        {
+<tr>
+    <td>@(detail.Product != null ? detail.Product.ProName : "")</td>
+    <td>@detail.Price</td>
+    <td>@detail.Quantity</td>
+</tr>}
+    </table>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<CellPhoneX_2100009273.Models.Product>
+
+
+
+<!--New Products SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="title">Sản phẩm mới</h3>
+                </div>
+            </div>
+            <!-- /section title -->
+            <!-- Products tab & slick -->
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab1" class="tab-pane active">
+                            <div class="products-slick" data-nav="#slick-nav-1">
+                                @{
+                                    foreach (var item in Model)
+                                    {
+                                        <!-- product -->
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img src="~/Assets/ProductImages/@item.ProImage">
+                                                <div class="product-label">
+                                                    <span class="new">NEW</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-body">
+                                                <p class="product-category">@item.Category.CatName</p>
+                                                <h3 class="product-name">@Html.ActionLink(item.ProName, "Details", new { id = item.ProId})</h3>
+                                                <h4 class="product-price">@String.Format("{0:###,0 VND}", item.ProPrice) <del class="product-old-price">$990.00</del></h4>
+                                               
+                                            </div>
+                                            <div class="add-to-cart">
+                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+                                                @Html.ActionLink("Add to cart", "OrderNow", "ShoppingCart", new { Id= item.ProId}, null)</button>
+                                            </div>
+                                        </div>
+                                        <!-- /product -->
+                                    }
+                                }
+
+
+                            </div>
+                        
+                        </div>
+                        <!-- /tab -->
+                    </div>
+                </div>
+            </div>
+            <!-- Products tab & slick -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

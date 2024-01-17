@@ -1,0 +1,49 @@
+﻿@model CellPhoneX_2100009273.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="~/Assets/ProductImages/@Model.ProImage">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7" style=" margin-top: 50px;">
+                <div class="product-details">
+                    <h2 class="product-name">@Html.DisplayFor(model => model.ProName)</h2>
+                    <div>
+                        <h3 class="product-price"> @Html.DisplayFor(model => model.ProPrice)</h3>
+                        <span class="product-available">Số lượng: @Html.DisplayFor(model => model.stock_quantity)</span>
+                    </div>
+
+                    <div class="add-to-cart">
+                        <div class="qty-label">
+                            Qty
+                        </div>
+                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> @Html.ActionLink("Add to cart", "OrderNow", "ShoppingCart", new { Id = Model.ProId }, null)</button>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /Product details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+@Html.Action("NewProduct", "Products")

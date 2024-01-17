@@ -1,0 +1,91 @@
+﻿
+@using CellPhoneX_2100009273.Models;
+
+<!-- SECTION -->
+<div class="section">
+
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- ASIDE -->
+            <div id="aside" class="col-md-3">
+                <!--Call side bar tab-->
+                @Html.Partial("_SideBar")
+            </div>
+            <!-- /ASIDE -->
+            <!-- STORE -->
+            <div id="store" class="col-md-9">
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <div class="section-nav">
+                            <ul class="section-tab-nav tab-nav">
+                                @{
+                                    int n = 0;
+                                    foreach (Category i in Common.GetCategories())
+                                    {
+                                        <li class="@(n++ == 0 ? "active" : "")">
+                                            <a id="@i.Id-tab" data-toggle="tab"
+                                               href="#@i.Id" role="tab" aria-controls="@i.Id" aria-selected="false">@i.CatName</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /section title -->
+
+                <div class="col-md-12">
+                    <div class="tab-content products-tabs" id="myTabContent">
+                        @{
+                            int m = 0;
+                            foreach (Category j in Common.GetCategories())
+                            {
+                                <div class="tab-pane fade show @(m++ == 0 ? "active" : "")" id="@j.Id" role="tabpanel" aria-labelledby="@j.Id-tab">
+                                    @{
+                                        foreach (Product item in Common.getProductByCateId(j.Id))
+                                        {
+                                            <!-- product -->
+                                            <div class="col-md-4">
+                                                <div class="product">
+                                                    <div class="product-img">
+                                                        <img src="~/Assets/ProductImages/@item.ProImage">
+                                                    </div>
+                                                    <div class="product-body">
+                                                        <p class="product-category">@item.Category.CatName</p>
+                                                        <h3 class="product-name"><a href="#">@Html.ActionLink(item.ProName, "Details", new { id = item.ProId })</a></h3>
+                                                        <h4 class="product-price">@String.Format("{0:###,0 VND}", item.ProPrice) </h4>
+
+                                                        <div class="product-btns">
+                                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="add-to-cart">
+                                                        <button class="add-to-cart-btn">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                            @Html.ActionLink("Add to cart", "OrderNow", "ShoppingCart", new { Id = item.ProId }, null)
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /product -->
+                                        }
+                                    }
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

@@ -1,0 +1,36 @@
+﻿@model CellPhoneX_2100009273.Models.UserRolesMapping
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <h4>UserRolesMapping</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleMaster.RollName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RoleMaster.RollName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+</div>

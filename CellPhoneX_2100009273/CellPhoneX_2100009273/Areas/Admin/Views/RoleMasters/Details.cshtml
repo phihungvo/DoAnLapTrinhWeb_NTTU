@@ -1,0 +1,28 @@
+﻿@model CellPhoneX_2100009273.Models.RoleMaster
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <h4>RoleMaster</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RollName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RollName)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-success" }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+

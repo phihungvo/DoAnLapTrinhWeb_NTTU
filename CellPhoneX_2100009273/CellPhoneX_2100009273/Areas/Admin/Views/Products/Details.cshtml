@@ -1,0 +1,76 @@
+﻿@model CellPhoneX_2100009273.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div class="container">
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isNew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isNew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bestSelling)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bestSelling)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stock_quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stock_quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CatName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CatName)
+        </dd>
+
+    </dl>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProId }, new { @class="btn btn-success "}) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+

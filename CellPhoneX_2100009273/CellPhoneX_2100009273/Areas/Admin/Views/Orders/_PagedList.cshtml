@@ -1,0 +1,15 @@
+﻿
+@using CellPhoneX_2100009273.Models
+@using PagedList
+@using PagedList.Mvc
+@model  PagedList.IPagedList<Order>
+
+<div class="pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+</div>
+
+<script src="~/Assets/js/jquery.min.js"></script>
+<script src="~/Assets/js/bootstrap.min.js"></script>
+<script src="~/Assets/js/slick.min.js"></script>
+<script src="~/Assets/js/nouislider.min.js"></script>
+<script src="~/Assets/js/jquery.zoom.min.js"></script>

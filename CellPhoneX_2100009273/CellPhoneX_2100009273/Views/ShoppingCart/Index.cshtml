@@ -1,0 +1,95 @@
+﻿@using CellPhoneX_2100009273.Models
+
+@{
+    ViewBag.Title = "Shopping Cart";
+}
+
+<style>
+    .center-cell td {
+      vertical-align: middle !important;
+    }
+</style>
+
+
+<div class="container mt-4 ">
+    <h2 class="mb-4">Shopping cart</h2>
+    @if (Session["Cart"] != null)
+    {
+        using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+        {
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th></th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Thành tiền</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cart in (List<Cart>)Session["Cart"])
+                    {
+                        double productPrice = Convert.ToDouble(cart.Product.ProPrice);
+                        int quantity = Convert.ToInt32(cart.Quantity);
+                        double subtotal = productPrice * quantity;
+
+                        <tr class="center-cell">
+                            <td>@cart.Product.ProName</td>
+                            <td>
+                                <img src="~/Assets/ProductImages/@cart.Product.ProImage" width="150" height="140" />
+                            </td>
+                            <td>
+                                <input type="text" name="quantity" class="form-control" value="@cart.Quantity" />
+                            </td>
+                            <td>@Html.FormatValue(productPrice, "{0:###,0}")</td>
+                            <td>@Html.FormatValue(subtotal, "{0:###,0}")</td>
+                            <td>
+                                @Html.ActionLink("X", "RemoveItem", "ShoppingCart", new { Id = cart.Product.ProId }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        @{
+                            List<Cart> temp = (List<Cart>)Session["Cart"];
+                            var total = temp.Sum(x => x.Quantity * x.Product.ProPrice);
+                        }
+                        <td colspan="2">
+                            @Html.ActionLink("Continue Shopping", "Index", "Home", new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Empty Cart", "ClearCart", "ShoppingCart", new { @class = "btn btn-warning" })
+                            @Html.ActionLink("Check Out", "CheckOut", "ShoppingCart", new { @class = "btn btn-success" })
+                            <input type="submit" value="Update Cart" class="btn btn-info" /><br />
+                            <span id="errmsg" style="color: red"></span>
+                        </td>
+                        <td align="right" style="color: red; font-size: large; font-weight: 700"><strong>Total:</strong></td>
+                        <td colspan="2" style="color: red; font-size: large; font-weight: 700">
+                            @Html.FormatValue(total, "{0:###,0 VND}")
+                        </td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        }
+    }
+    else
+    {
+        <h4>No items in your cart</h4>
+    }
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".quantity").keyypress(function (e) {
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("errmsg").html("Enter digits only!").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>
+

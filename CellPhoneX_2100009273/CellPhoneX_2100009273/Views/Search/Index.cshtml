@@ -1,0 +1,83 @@
+﻿
+@using CellPhoneX_2100009273.Models
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--SEARCH INDEX VIEW-->
+<!-- SEARCH BAR -->
+<p></p>
+<div class="container">
+    <div class="header-search">
+        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <div class="row" style="display: flex; margin: 0 10%">
+                <input type="text" class="input form-control" style="width: 70%; border-radius: 50px 0 0 50px" value="@ViewBag.Keyword"
+                       name="searchString" placeholder="Nhập từ khóa cần tìm">
+                <button type="submit" class="search-btn" style="width: 30%">Search</button>
+            </div><hr />
+        }
+    </div>
+
+</div>
+<!-- /SEARCH BAR -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div id="store" class="col-md-12">
+                @{
+                    foreach (var item in Model)
+                    {
+                        <!-- product -->
+                        <div class="col-md-3">
+                            <div class="product">
+                                <div class="product-img">
+                                    <img src="~/Assets/ProductImages/@item.ProImage">
+
+                                </div>
+                                <div class="product-body">
+                                    <p class="product-category">@item.Category.CatName</p>
+                                    <h3 class="product-name"><a href="#">@Html.ActionLink(item.ProName, "Details", new { id = item.ProId })</a></h3>
+                                    <h4 class="product-price">@String.Format("{0:###,0 VND}", item.ProPrice) </h4>
+
+                                    <div class="product-btns">
+                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+                                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart">
+                                    <button class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        @Html.ActionLink("Add to cart", "OrderNow", "ShoppingCart", new { Id = item.ProId }, null)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /product -->
+                    }
+
+                }
+
+            </div>
+            <div class="container">
+                <div class="pagination">
+                    Page @(Model.PageCount < @Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                </div>
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

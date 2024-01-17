@@ -1,0 +1,115 @@
+﻿@using CellPhoneX_2100009273.Models
+
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 20px">
+    <div class="section-title text-center">
+        <h3 class="title">Đặt mua sản phẩm</h3>
+    </div>
+    <div class="row"  style="margin: 40px 0">
+        <div class="col-sm-5">
+
+            @using (Html.BeginForm("ProcessOrder", "ShoppingCart", FormMethod.Post, new { id = "customer-form" }))
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Billing Details -->
+                        <div class="billing-details">
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Họ tên</label>
+                                <input class="input form-control" type="text" name="cusName">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Số điện thoại</label>
+                                <input class="input form-control" type="text" name="cusPhone">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Email</label>
+                                <input class="input form-control" type="text" name="cusEmail">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-5">Địa chỉ</label>
+                                <input class="input form-control" type="text" name="cusAddress">
+                            </div>
+                            <div class="form-group"  style="margin-top: 30px">
+                                <div class="col-md-offset-10 col-md-10">
+                                    @Html.ActionLink("<< Back to Cart", "Index", "ShoppingCart")
+                                    <input type="submit" value="Process Order" class="btn btn-success" />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Billing Details -->
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="col-sm-7">
+            @{
+                if (Session["Cart"] != null)
+                {
+                    <table class="table">
+                        <tr style="font-size: 15px;color: white;background-color: orange">
+                            <td>Name</td>
+                            <td>Quantity</td>
+                            <td>Price</td>
+                            <td>Sub Total</td>
+                        </tr>
+
+                        @foreach (var cart in (List<Cart>)Session["Cart"])
+                        {
+                            double p = Convert.ToDouble(cart.Product.ProPrice);
+                            int q = Convert.ToInt32(cart.Quantity);
+                            double subtotal = p * q;
+                            <tr>
+                                <td>@cart.Product.ProName</td>
+                                <td>@cart.Quantity</td>
+                                <td>@Html.FormatValue(cart.Product.ProPrice, "{0:C}")</td>
+                                <td>@Html.FormatValue(subtotal, "{0:C}")</td>
+                            </tr>
+                        }
+                        <tr>
+                            @{
+                                List<Cart> temp = (List<Cart>)Session["Cart"];
+                                var total = temp.Sum(x => x.Quantity * x.Product.ProPrice);
+                            }
+                            <td style="font-weight: bold; font-size: larger" colspan="2" align="left">Total:</td>
+                            <td></td>
+                            <td style="color:red ;font-size: 20px; font-weight: 700" colspan="2" align="left">@Html.FormatValue(total, "{0:C}")</td>
+                        </tr>
+                    </table>
+                }
+                else
+                {
+                    <h4>No items in your cart!</h4>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $("#customer-form").validate({
+        rules: {
+            cusName: {
+                required: true
+            },
+            cusPhone: {
+                required: true
+            },
+            cusEmail: {
+                required: true
+            },
+            cusAddress: {
+                required: true
+            }
+        }
+    });
+</script>
+

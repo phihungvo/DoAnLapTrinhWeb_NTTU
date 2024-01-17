@@ -1,0 +1,78 @@
+﻿@*@model IEnumerable<CellPhoneX_2100009273.Models.Product>*@
+
+
+@using CellPhoneX_2100009273.Models
+@using PagedList
+@using PagedList.Mvc
+@model  PagedList.IPagedList<Product>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Admin_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<style>
+    .midlle_tr {
+        vertical-align: middle !important;
+    }
+</style>
+
+<div class="container-fluid">
+
+    <table class="table table-striped">
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th>Giá</th>
+            <th>Mới</th>
+            <th>Bán chạy</th>
+            <th>Tồn kho</th>
+            <th>Loại sản phẩm</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="midlle_tr">
+                    @Html.DisplayFor(modelItem => item.ProName)
+                </td>
+                <td>
+                    <img src="~/Assets/ProductImages/@item.ProImage" class="img-responsive" style="width: 50px" />
+                </td>
+                <td class="midlle_tr">
+                    @Html.DisplayFor(modelItem => item.ProPrice)
+                </td>
+                <td class="midlle_tr">
+                    @Html.DisplayFor(modelItem => item.isNew)
+                </td>
+                <td class="midlle_tr">
+                    @Html.DisplayFor(modelItem => item.bestSelling)
+                </td>
+                <td class="midlle_tr">
+                    @Html.DisplayFor(modelItem => item.stock_quantity)
+                </td>
+                <td class="midlle_tr">
+                    @Html.DisplayFor(modelItem => item.Category.CatName)
+                </td>
+                <td class="midlle_tr">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ProId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details", new { id = item.ProId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProId }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+<div class="pagination" style="display: flex; justify-content: center;">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+</div>
+

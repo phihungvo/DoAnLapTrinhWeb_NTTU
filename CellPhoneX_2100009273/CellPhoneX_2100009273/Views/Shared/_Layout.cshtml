@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="~/Assets/css/bootstrap.min.css" />
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="~/Assets/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="~/Assets/css/slick-theme.css" />
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="~/Assets/css/nouislider.min.css" />
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="~/Assets/css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="~/Assets/css/style.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        a:hover {
+            text-decoration: none; /* Loại bỏ gạch chân khi hover */
+            color: inherit; 
+            background-color:none;
+            /* Sử dụng màu chữ mặc định của phần tử cha */
+        }
+    </style>
+
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <li><a href="~/Assets/#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+                    <li><a href="~/Assets/#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
+                    <li><a href="~/Assets/#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+        <!-- MAIN HEADER -->
+        <div id="header" style="padding: 0 !important">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="@Url.Action("Index", "Home")">
+                                <img src="~/Assets/Logo_img/CellPhoneX.png" style="width: 30%" />
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+                    <!-- SEARCH BAR -->
+                    <div class="col-md-5">
+                        <div id="responsive-nav">
+                            <!-- NAV -->
+                            @{
+                                string controller = ViewContext.RouteData.Values["controller"] as string;
+                                string action = ViewContext.RouteData.Values["action"] as string;
+                            }
+
+                            <ul class="main-nav nav navbar-nav" style="margin-top: 13px">
+                                <li class="@((controller == "Home" && action == "Index") ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li class="@((controller == "Products" && action == "Index") ? "active" : "")">@Html.ActionLink("Sản phẩm", "Index", "Products")</li>
+                                <li class="@((controller == "Home" && action == "About") ? "active" : "")">@Html.ActionLink("Về chúng tôi", "About", "Home")</li>
+                                <li><a href="#">Tin tức</a></li>
+                                <li class="@((controller == "Home" && action == "Contact") ? "active" : "")">@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                            </ul>
+                            <!-- /NAV -->   
+                        </div>
+                    </div>
+                    <!-- /SEARCH BAR -->
+                    <!-- ACCOUNT -->
+                    <div class="col-md-4 clearfix" style="color: white;display: flex; justify-content: space-between; align-items: center; padding: 20px 0;">
+
+                        <!-- Cart -->
+                        <div><i class="fa fa-search"></i>@Html.ActionLink("Tìm kiếm", "Index", "Search", null, new { style = "color: white; padding-left: 10px;  margin-right: 10px" })</div>
+                        <div><i class="fa fa-shopping-cart"></i>@Html.ActionLink("Giỏ hàng", "Index", "ShoppingCart", null, new { style = "color: white ; padding-left: 10px" })</div>
+                        <div style="display: flex; margin-left: 10px">
+                            <ul class="nav navbar-nav " style="display: flex; align-items: center; ">
+                                @{
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li>@User.Identity.Name</li>
+                                        <li>@Html.ActionLink("Logout", "Login", "Accounts")</li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            @Html.ActionLink("Signup", "Signup", "Accounts", null, new { style = "text-decoration: none; color: inherit;" })
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <!-- /Cart -->
+                        <!-- Menu Toogle -->
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+    <!-- /HEADER -->
+
+
+    @RenderBody()
+
+
+    <!-- /NEWSLETTER -->
+    <!-- FOOTER -->
+    <footer id="footer">
+        <!-- top footer -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">About Us</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                            <ul class="footer-links">
+                                <li><a href="~/Assets/#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+                                <li><a href="~/Assets/#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                                <li><a href="~/Assets/#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Categories</h3>
+                            <ul class="footer-links">
+                                <li><a href="~/Assets/#">Hot deals</a></li>
+                                <li><a href="~/Assets/#">Laptops</a></li>
+                                <li><a href="~/Assets/#">Smartphones</a></li>
+                                <li><a href="~/Assets/#">Cameras</a></li>
+                                <li><a href="~/Assets/#">Accessories</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="clearfix visible-xs"></div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Information</h3>
+                            <ul class="footer-links">
+                                <li><a href="~/Assets/#">About Us</a></li>
+                                <li><a href="~/Assets/#">Contact Us</a></li>
+                                <li><a href="~/Assets/#">Privacy Policy</a></li>
+                                <li><a href="~/Assets/#">Orders and Returns</a></li>
+                                <li><a href="~/Assets/#">Terms & Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Service</h3>
+                            <ul class="footer-links">
+                                <li><a href="~/Assets/#">My Account</a></li>
+                                <li><a href="~/Assets/#">View Cart</a></li>
+                                <li><a href="~/Assets/#">Wishlist</a></li>
+                                <li><a href="~/Assets/#">Track My Order</a></li>
+                                <li><a href="~/Assets/#">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /top footer -->
+
+    </footer>
+    <!-- /FOOTER -->
+    <!-- jQuery Plugins -->
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/slick.min.js"></script>
+    <script src="~/Assets/js/nouislider.min.js"></script>
+    <script src="~/Assets/js/jquery.zoom.min.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+</body>
+</html>

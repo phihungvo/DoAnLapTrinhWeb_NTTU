@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d16e4d231dd47168e0818c854b843b6" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="4.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Order" Width="1.5" PointX="7" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.OrderDetail" Width="1.5" PointX="4.875" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="7" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.RoleMaster" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.UserRolesMapping" Width="1.5" PointX="2.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product_Cate" Width="1.5" PointX="2.75" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK__Product__CatId__0697FACD" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__OrderDeta__Order__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__OrderDeta__Produ__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__UserRoles__RoleI__7D0E9093" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__UserRoles__UserI__7C1A6C5A" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
